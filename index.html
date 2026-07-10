@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teachers' Center — দক্ষ ও যোগ্য শিক্ষক খোঁজার নির্ভরযোগ্য মাধ্যম</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  :root{
+    --ink:#0f2c22;
+    --forest:#0d3b34;
+    --forest-2:#124a40;
+    --gold:#c9962f;
+    --gold-light:#e6c374;
+    --cream:#faf6ec;
+    --cream-2:#f2ead7;
+    --paper:#ffffff;
+    --text:#3f3a33;
+    --muted:#7a7368;
+    --line:#e6ddc8;
+    --male:#1f5f8b;
+    --female:#a3436b;
+    --radius:14px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Hind Siliguri','Poppins',sans-serif;background:var(--cream);color:var(--text);line-height:1.7;}
+  h1,h2,h3,h4{font-family:'Noto Serif Bengali','Hind Siliguri',serif;color:var(--ink);}
+  .eyebrow{font-family:'Poppins',sans-serif;letter-spacing:.14em;text-transform:uppercase;font-size:12px;font-weight:600;color:var(--gold);}
+  a{text-decoration:none;}
+  img{display:block;max-width:100%;}
+
+  header{
+    background:linear-gradient(120deg,var(--ink),var(--forest-2));
+    padding:14px 5%;
+    display:flex;justify-content:space-between;align-items:center;
+    position:sticky;top:0;z-index:1000;
+    border-bottom:2px solid var(--gold);
+  }
+  .logo{color:#fff;font-family:'Noto Serif Bengali',serif;font-size:24px;font-weight:700;display:flex;align-items:center;gap:10px;}
+  .logo .mark{width:38px;height:38px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;color:var(--ink);font-size:17px;}
+  .logo span{color:var(--gold-light);}
+  nav{display:flex;align-items:center;gap:6px;}
+  nav a{color:#e7e2d3;padding:8px 14px;border-radius:8px;font-size:15.5px;font-weight:500;transition:.25s;}
+  nav a:hover,nav a.active{color:var(--ink);background:var(--gold-light);}
+  .auth-btn{background:var(--gold)!important;color:var(--ink)!important;font-weight:700!important;}
+  .auth-btn:hover{background:var(--gold-light)!important;}
+
+  .hero{
+    position:relative;overflow:hidden;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(201,150,47,.18), transparent 40%),
+      linear-gradient(120deg, var(--ink) 0%, var(--forest) 55%, var(--forest-2) 100%);
+    padding:70px 5% 90px;
+    display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;
+  }
+  .hero-text{position:relative;z-index:2;}
+  .hero-text .eyebrow{color:var(--gold-light);}
+  .hero h1{color:#fff;font-size:44px;margin:14px 0 18px;line-height:1.35;}
+  .hero h1 em{font-style:normal;color:var(--gold-light);}
+  .hero p{color:#cfd8d2;font-size:17px;max-width:560px;margin-bottom:30px;}
+
+  .search-container{
+    background:var(--paper);padding:18px;border-radius:var(--radius);
+    display:flex;gap:12px;max-width:640px;box-shadow:0 20px 40px -12px rgba(0,0,0,.4);
+  }
+  .search-container select,.search-container button{
+    padding:13px 14px;border:1px solid var(--line);border-radius:9px;font-size:15.5px;outline:none;
+    font-family:'Hind Siliguri',sans-serif;background:#fff;
+  }
+  .search-container select{flex:2;}
+  .search-container button{
+    flex:1.1;background:var(--forest);color:#fff;border:none;cursor:pointer;font-weight:700;transition:.25s;
+    display:flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;
+  }
+  .search-container button:hover{background:var(--ink);}
+  .trust-row{display:flex;gap:30px;margin-top:26px;flex-wrap:wrap;position:relative;z-index:2;}
+  .trust-row div{color:#e7e2d3;font-size:14px;}
+  .trust-row strong{display:block;font-family:'Poppins',sans-serif;color:var(--gold-light);font-size:26px;font-weight:700;}
+
+  .id-card-wrap{position:relative;z-index:2;display:flex;justify-content:center;}
+  .id-card{
+    width:290px;background:var(--paper);border-radius:16px;overflow:hidden;
+    box-shadow:0 30px 60px -14px rgba(0,0,0,.55);
+    transform:rotate(4deg);
+    border:1px solid var(--line);
+  }
+  .id-card-top{background:linear-gradient(120deg,var(--forest),var(--ink));padding:14px 18px;display:flex;justify-content:space-between;align-items:center;}
+  .id-card-top .t{color:#fff;font-size:13px;font-weight:700;font-family:'Poppins',sans-serif;letter-spacing:.05em;}
+  .id-card-top .badge{background:var(--gold);color:var(--ink);font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;font-family:'Poppins',sans-serif;}
+  .id-card-body{padding:20px;text-align:center;}
+  .id-card-photo{width:82px;height:82px;border-radius:50%;margin:0 auto 12px;border:3px solid var(--gold-light);overflow:hidden;background:#eee;}
+  .id-card-photo img{width:100%;height:100%;object-fit:cover;}
+  .id-card-body h4{font-size:18px;margin-bottom:2px;}
+  .id-card-body .role{color:var(--gold);font-size:12.5px;font-weight:600;font-family:'Poppins',sans-serif;margin-bottom:10px;}
+  .id-card-row{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);border-top:1px dashed var(--line);padding:6px 0;}
+  .id-card-row b{color:var(--text);}
+  .id-card-strip{height:10px;background:repeating-linear-gradient(45deg,var(--gold),var(--gold) 10px,var(--forest) 10px,var(--forest) 20px);}
+
+  .container{width:90%;max-width:1200px;margin:80px auto;}
+  .section-head{text-align:center;margin-bottom:46px;}
+  .section-head .eyebrow{display:block;margin-bottom:8px;}
+  .section-title{font-size:32px;position:relative;}
+  .section-sub{color:var(--muted);max-width:600px;margin:12px auto 0;font-size:15.5px;}
+  .section-title::after{content:'';display:block;width:64px;height:3px;background:var(--gold);margin:14px auto 0;border-radius:2px;}
+
+  .categories-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;}
+  .category-card{
+    position:relative;border-radius:var(--radius);overflow:hidden;height:340px;
+    box-shadow:0 10px 25px -8px rgba(15,44,34,.25);
+    transition:.35s;border:1px solid var(--line);
+  }
+  .category-card:hover{transform:translateY(-6px);box-shadow:0 22px 40px -10px rgba(15,44,34,.35);}
+  .category-card .bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:.5s;}
+  .category-card:hover .bg{transform:scale(1.06);}
+  .category-card .overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(to top, rgba(13,25,20,.94) 15%, rgba(13,25,20,.55) 55%, rgba(13,25,20,.15));
+  }
+  .category-card .cat-content{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:24px;color:#fff;}
+  .category-card h3{color:#fff;font-size:22px;margin-bottom:8px;}
+  .category-card p{font-size:14px;color:#dce4df;margin-bottom:12px;}
+  .sub-cats{display:flex;flex-wrap:wrap;gap:8px;}
+  .sub-cat-badge{background:rgba(201,150,47,.9);color:var(--ink);padding:4px 12px;border-radius:20px;font-size:12.5px;font-weight:700;font-family:'Poppins',sans-serif;}
+  .cat-tag{position:absolute;top:16px;left:16px;z-index:3;background:var(--gold);color:var(--ink);font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;font-family:'Poppins',sans-serif;}
+  .photo-note{position:absolute;bottom:8px;right:12px;z-index:3;font-size:10px;color:#c7cec9;opacity:.75;font-family:'Poppins',sans-serif;}
+
+  .teacher-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;}
+  .teacher-card{
+    background:var(--paper);border-radius:var(--radius);overflow:hidden;
+    box-shadow:0 10px 25px -10px rgba(15,44,34,.2);border:1px solid var(--line);
+    transition:.3s;
+  }
+  .teacher-card:hover{transform:translateY(-5px);box-shadow:0 20px 34px -12px rgba(15,44,34,.3);}
+  .tc-head{background:linear-gradient(120deg,var(--forest),var(--forest-2));padding:26px 20px 46px;position:relative;text-align:center;}
+  .tc-head .version-badge{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.15);color:#fff;font-size:11px;padding:4px 10px;border-radius:20px;font-family:'Poppins',sans-serif;font-weight:600;}
+  .tc-head .id-badge{position:absolute;top:12px;left:12px;background:var(--gold);color:var(--ink);font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;font-family:'Poppins',sans-serif;}
+  .tc-photo{
+    width:96px;height:96px;border-radius:50%;margin:0 auto;border:4px solid var(--paper);
+    box-shadow:0 6px 16px rgba(0,0,0,.25);overflow:hidden;background:#eef1ee;position:relative;
+  }
+  .tc-photo img{width:100%;height:100%;object-fit:cover;}
+  .gender-tag{
+    position:absolute;bottom:-38px;left:50%;transform:translateX(-50%);
+    background:var(--paper);border-radius:20px;padding:4px 12px;font-size:11.5px;font-weight:700;
+    box-shadow:0 4px 10px rgba(0,0,0,.12);display:flex;align-items:center;gap:5px;font-family:'Poppins',sans-serif;
+    white-space:nowrap;
+  }
+  .gender-tag.male{color:var(--male);}
+  .gender-tag.female{color:var(--female);}
+  .gender-tag i.fa-mosque, .gender-tag i.fa-om, .gender-tag i.fa-cross{color:var(--gold);}
+
+  .tc-body{padding:46px 22px 24px;text-align:center;}
+  .tc-body h4{font-size:19px;margin-bottom:3px;}
+  .tc-role{color:var(--gold);font-weight:700;font-size:13px;margin-bottom:14px;font-family:'Poppins',sans-serif;}
+  .tc-bio{font-size:13.5px;color:var(--muted);margin-bottom:16px;min-height:44px;}
+  .tc-details{text-align:left;border-top:1px dashed var(--line);padding-top:14px;}
+  .tc-details div{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:5px 0;color:var(--text);}
+  .tc-details div span:first-child{color:var(--muted);display:flex;align-items:center;gap:6px;}
+  .tc-details i{width:14px;color:var(--forest);}
+  .tc-contact-btn{
+    margin-top:16px;width:100%;padding:11px;background:var(--ink);color:#fff;border:none;border-radius:8px;
+    font-weight:700;cursor:pointer;font-family:'Hind Siliguri',sans-serif;font-size:14.5px;transition:.25s;
+  }
+  .tc-contact-btn:hover{background:var(--forest);}
+
+  .forms-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+  @media (max-width:800px){.forms-wrapper{grid-template-columns:1fr;} .hero{grid-template-columns:1fr;} .id-card-wrap{margin-top:20px;}}
+  .form-box{background:var(--paper);padding:32px;border-radius:var(--radius);box-shadow:0 10px 25px -10px rgba(15,44,34,.2);border-top:5px solid var(--forest);}
+  .form-box.parent-box{border-top-color:var(--gold);}
+  .form-box h3{font-size:22px;margin-bottom:22px;display:flex;align-items:center;gap:10px;}
+  .form-box h3 i{color:var(--forest);}
+  .form-box.parent-box h3 i{color:var(--gold);}
+  .form-group{margin-bottom:16px;}
+  .form-group label{display:block;margin-bottom:6px;font-weight:600;font-size:14.5px;}
+  .form-group input,.form-group select,.form-group textarea{
+    width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:8px;outline:none;font-size:15px;
+    font-family:'Hind Siliguri',sans-serif;background:var(--cream);
+  }
+  .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--forest);background:#fff;}
+  .form-box button{width:100%;padding:13px;background:var(--forest);color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:16px;transition:.25s;}
+  .form-box.parent-box button{background:var(--gold);color:var(--ink);}
+  .form-box button:hover{opacity:.9;transform:translateY(-1px);}
+
+  .auth-section{background:linear-gradient(120deg,var(--forest),var(--ink));padding:56px 30px;border-radius:18px;text-align:center;color:#fff;}
+  .auth-section h2{color:#fff;}
+  .auth-section p{color:#cfd8d2;margin-bottom:0;}
+  .login-box{max-width:400px;margin:30px auto 0;background:var(--paper);padding:28px;border-radius:12px;box-shadow:0 20px 40px rgba(0,0,0,.3);}
+  .login-box .form-group label{color:var(--text);}
+  .login-box button{width:100%;padding:12px;background:var(--ink);color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;margin-top:6px;}
+  .login-box button:hover{background:var(--forest);}
+
+  footer{background:var(--ink);color:#aab4ac;padding:50px 5% 20px;margin-top:90px;font-size:14.5px;}
+  .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:34px;border-bottom:1px solid #26443b;padding-bottom:30px;}
+  .footer-logo h2{color:#fff;margin-bottom:12px;font-size:22px;}
+  .footer-info h4,.footer-ceo h4{color:#fff;margin-bottom:12px;}
+  .footer-info p{margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+  .footer-info i{color:var(--gold-light);width:16px;}
+  .footer-ceo{background:rgba(255,255,255,.05);padding:16px;border-radius:8px;border-left:4px solid var(--gold);}
+  .footer-ceo p:first-of-type{color:#fff;font-weight:700;font-size:16px;}
+  .copyright{text-align:center;margin-top:20px;font-size:13.5px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><span class="mark"><i class="fa-solid fa-graduation-cap"></i></span>Teachers'<span>Center</span></div>
+  <nav>
+    <a href="#" class="active">হোম</a>
+    <a href="#categories">বিভাগসমূহ</a>
+    <a href="#teachers">শিক্ষক প্রোফাইল</a>
+    <a href="#forms">রেজিস্ট্রেশন / ফর্ম</a>
+    <a href="#login" class="auth-btn"><i class="fa-solid fa-user-lock"></i> লগইন</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <span class="eyebrow">সিরাজগঞ্জ থেকে সারাদেশ</span>
+    <h1>আপনার সন্তানের জন্য <em>সেরা ও যাচাইকৃত</em> শিক্ষকটি বেছে নিন</h1>
+    <p>সুনামধন্য, দক্ষ এবং আধুনিক শিক্ষকদের বিশাল ডাটাবেজ থেকে আপনার কাঙ্ক্ষিত বিষয়ভিত্তিক শিক্ষক খুঁজুন সহজেই — প্রতিটি প্রোফাইল যাচাইকৃত ও নির্ভরযোগ্য।</p>
+
+    <div class="search-container">
+      <select id="search-dept">
+        <option value="">বিভাগ নির্বাচন করুন</option>
+        <option value="primary">প্রাথমিক বিভাগ</option>
+        <option value="secondary">মাধ্যমিক বিভাগ</option>
+        <option value="higher">উচ্চ মাধ্যমিক বিভাগ</option>
+        <option value="madrasah">মাদ্রাসা বিভাগ</option>
+        <option value="job">জব বিভাগ</option>
+      </select>
+      <select id="search-subject">
+        <option value="">বিষয় নির্বাচন করুন</option>
+        <option value="bangla">বাংলা</option>
+        <option value="english">ইংরেজি</option>
+        <option value="math">গণিত</option>
+        <option value="science">বিজ্ঞান / আইসিটি</option>
+      </select>
+      <button onclick="searchTutor()"><i class="fa-solid fa-magnifying-glass"></i> টিউটর খুঁজুন</button>
+    </div>
+
+    <div class="trust-row">
+      <div><strong>৫০০+</strong>যাচাইকৃত শিক্ষক</div>
+      <div><strong>৬</strong>শিক্ষাবিভাগ</div>
+      <div><strong>১২০০+</strong>সন্তুষ্ট অভিভাবক</div>
+    </div>
+  </div>
+
+  <div class="id-card-wrap">
+    <div class="id-card">
+      <div class="id-card-top">
+        <span class="t">TEACHERS' CENTER</span>
+        <span class="badge">যাচাইকৃত</span>
+      </div>
+      <div class="id-card-body">
+        <div class="id-card-photo"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=RafiqulSir&top=shortHairShortFlat&facialHair=beardLight&clothing=blazerShirt" alt="শিক্ষক আইডি ছবি"></div>
+        <h4>মোঃ রফিকুল ইসলাম</h4>
+        <div class="role">সহকারী শিক্ষক · গণিত</div>
+        <div class="id-card-row"><span>শিক্ষক আইডি</span><b>TC-1042</b></div>
+        <div class="id-card-row"><span>বিভাগ</span><b>মাধ্যমিক</b></div>
+        <div class="id-card-row"><span>ভার্সন</span><b>বাংলা মাধ্যম</b></div>
+      </div>
+      <div class="id-card-strip"></div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+  <section id="categories">
+    <div class="section-head">
+      <span class="eyebrow">যেখান থেকেই শুরু হোক</span>
+      <h2 class="section-title">শিক্ষাদানের বিভাগসমূহ</h2>
+      <p class="section-sub">প্রাথমিক থেকে চাকরির প্রস্তুতি — প্রতিটি স্তরের জন্য রয়েছেন অভিজ্ঞ ও প্রমাণিত শিক্ষক।</p>
+    </div>
+
+    <div class="categories-grid">
+      <div class="category-card">
+        <span class="cat-tag">Class 1–5</span>
+        <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=900&q=80');"></div>
+        <div class="overlay"></div>
+        <div class="cat-content">
+          <h3>প্রাথমিক বিভাগ</h3>
+          <div class="sub-cats"><span class="sub-cat-badge">Class 1–5</span></div>
+          <p>সকল বিষয়ে সহজ ও মজাদার পদ্ধতিতে বুনিয়াদ গড়ার দক্ষ শিক্ষক।</p>
+        </div>
+      </div>
+
+      <div class="category-card">
+        <span class="cat-tag">Class 6–10 · SSC</span>
+        <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=900&q=80');"></div>
+        <div class="overlay"></div>
+        <div class="cat-content">
+          <h3>মাধ্যমিক বিভাগ</h3>
+          <div class="sub-cats"><span class="sub-cat-badge">Class 6–10</span><span class="sub-cat-badge">SSC</span></div>
+          <p>বিজ্ঞান, মানবিক ও ব্যবসায় শিক্ষা শাখার বোর্ড পরীক্ষার বিশেষ প্রস্তুতি।</p>
+        </div>
+        <span class="photo-note">প্রতিনিধিত্বমূলক ছবি</span>
+      </div>
+
+      <div class="category-card">
+        <span class="cat-tag">HSC · আলিম</span>
+        <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=900&q=80');"></div>
+        <div class="overlay"></div>
+        <div class="cat-content">
+          <h3>উচ্চ মাধ্যমিক বিভাগ</h3>
+          <div class="sub-cats"><span class="sub-cat-badge">HSC / আলিম</span><span class="sub-cat-badge">এডমিশন</span></div>
+          <p>এইচএসসি ও বিশ্ববিদ্যালয় এডমিশন টেস্টের জন্য স্পেশালিস্ট মেন্টরগণ।</p>
+        </div>
+        <span class="photo-note">প্রতিনিধিত্বমূলক ছবি</span>
+      </div>
+
+      <div class="category-card">
+        <span class="cat-tag">ইবতেদায়ী · দাখিল</span>
+        <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1585036156171-384164a8c675?auto=format&fit=crop&w=900&q=80');"></div>
+        <div class="overlay"></div>
+        <div class="cat-content">
+          <h3>মাদ্রাসা বিভাগ</h3>
+          <div class="sub-cats"><span class="sub-cat-badge">ইবতেদায়ী</span><span class="sub-cat-badge">দাখিল</span><span class="sub-cat-badge">কওমি/আলিয়া</span></div>
+          <p>আরবি, হাদিস, ফিকাহসহ সাধারণ বিষয়সমূহে পারদর্শী শিক্ষক মণ্ডলী।</p>
+        </div>
+      </div>
+
+      <div class="category-card">
+        <span class="cat-tag">BCS · Bank</span>
+        <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80');"></div>
+        <div class="overlay"></div>
+        <div class="cat-content">
+          <h3>জব বিভাগ</h3>
+          <div class="sub-cats"><span class="sub-cat-badge">BCS</span><span class="sub-cat-badge">Primary Exam</span><span class="sub-cat-badge">Bank</span></div>
+          <p>চাকরিপ্রার্থীদের জন্য অভিজ্ঞ ও সফল গাইডলাইন প্রদানকারী শিক্ষক।</p>
+        </div>
+      </div>
+
+      <div class="category-card">
+        <span class="cat-tag">IELTS · Skill</span>
+        <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80');"></div>
+        <div class="overlay"></div>
+        <div class="cat-content">
+          <h3>অন্যান্য বিভাগ</h3>
+          <div class="sub-cats"><span class="sub-cat-badge">IELTS</span><span class="sub-cat-badge">Coding</span><span class="sub-cat-badge">Language</span></div>
+          <p>ভাষা শিক্ষা, স্কিল ডেভেলপমেন্ট ও প্রফেশনাল কোর্সের মেন্টর।</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="teachers" style="margin-top:90px;">
+    <div class="section-head">
+      <span class="eyebrow">আমাদের বিশ্বস্ত শিক্ষকমণ্ডলী</span>
+      <h2 class="section-title">শিক্ষক প্রোফাইল</h2>
+      <p class="section-sub">প্রতিটি প্রোফাইল আমাদের টিম কর্তৃক যাচাইকৃত — শিক্ষাগত সনদ, জাতীয় পরিচয়পত্র ও রেফারেন্স যাচাই করে অনুমোদিত।</p>
+    </div>
+
+    <div class="teacher-grid">
+
+      <div class="teacher-card">
+        <div class="tc-head">
+          <span class="id-badge">TC-1042</span>
+          <span class="version-badge">বাংলা ভার্সন</span>
+          <div class="tc-photo"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=RafiqulSir&top=shortHairShortFlat&facialHair=beardLight&clothing=blazerShirt" alt="শিক্ষক ছবি"></div>
+          <span class="gender-tag male"><i class="fa-solid fa-mars"></i> পুরুষ &nbsp;|&nbsp; <i class="fa-solid fa-mosque"></i> ইসলাম</span>
+        </div>
+        <div class="tc-body">
+          <h4>মোঃ রফিকুল ইসলাম</h4>
+          <div class="tc-role">সহকারী শিক্ষক · মাধ্যমিক (গণিত)</div>
+          <p class="tc-bio">১০ বছরের অভিজ্ঞতা সম্পন্ন গণিত শিক্ষক, এসএসসি ব্যাচে প্রতি বছর সেরা ফলাফল প্রদানকারী।</p>
+          <div class="tc-details">
+            <div><span><i class="fa-solid fa-user-graduate"></i> যোগ্যতা</span><b>M.Sc (গণিত), B.Ed</b></div>
+            <div><span><i class="fa-solid fa-phone"></i> মোবাইল</span><b>01711-223344</b></div>
+            <div><span><i class="fa-solid fa-envelope"></i> ইমেইল</span><b>rafiqul.math@tcbd.com</b></div>
+          </div>
+          <button class="tc-contact-btn" onclick="alert('যোগাযোগের জন্য অনুগ্রহ করে লগইন করুন।')">যোগাযোগ করুন</button>
+        </div>
+      </div>
+
+      <div class="teacher-card">
+        <div class="tc-head">
+          <span class="id-badge">TC-1078</span>
+          <span class="version-badge">উভয় ভার্সন</span>
+          <div class="tc-photo"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=SalmaMiss&top=hijab&clothing=blazerSweater" alt="শিক্ষক ছবি"></div>
+          <span class="gender-tag female"><i class="fa-solid fa-venus"></i> মহিলা &nbsp;|&nbsp; <i class="fa-solid fa-mosque"></i> ইসলাম</span>
+        </div>
+        <div class="tc-body">
+          <h4>মোছাঃ সালমা আক্তার</h4>
+          <div class="tc-role">সিনিয়র শিক্ষিকা · প্রাথমিক (সকল বিষয়)</div>
+          <p class="tc-bio">শিশুদের সাথে আন্তরিক ও কৌশলী আচরণে বুনিয়াদি শিক্ষায় দক্ষ, ১২ বছরের অভিজ্ঞতা।</p>
+          <div class="tc-details">
+            <div><span><i class="fa-solid fa-user-graduate"></i> যোগ্যতা</span><b>M.A (বাংলা), B.Ed</b></div>
+            <div><span><i class="fa-solid fa-phone"></i> মোবাইল</span><b>01812-556677</b></div>
+            <div><span><i class="fa-solid fa-envelope"></i> ইমেইল</span><b>salma.primary@tcbd.com</b></div>
+          </div>
+          <button class="tc-contact-btn" onclick="alert('যোগাযোগের জন্য অনুগ্রহ করে লগইন করুন।')">যোগাযোগ করুন</button>
+        </div>
+      </div>
+
+      <div class="teacher-card">
+        <div class="tc-head">
+          <span class="id-badge">TC-1105</span>
+          <span class="version-badge">English Version</span>
+          <div class="tc-photo"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=FarhanaMiss&top=longHairStraight2&clothing=blazerShirt&accessories=prescription02" alt="শিক্ষক ছবি"></div>
+          <span class="gender-tag female"><i class="fa-solid fa-venus"></i> মহিলা &nbsp;|&nbsp; <i class="fa-solid fa-mosque"></i> ইসলাম</span>
+        </div>
+        <div class="tc-body">
+          <h4>ফারহানা ইয়াসমিন</h4>
+          <div class="tc-role">প্রভাষক · উচ্চ মাধ্যমিক (ইংরেজি)</div>
+          <p class="tc-bio">IELTS ও একাডেমিক ইংরেজিতে বিশেষজ্ঞ, HSC ইংরেজি ১ম ও ২য় পত্রে পারদর্শী।</p>
+          <div class="tc-details">
+            <div><span><i class="fa-solid fa-user-graduate"></i> যোগ্যতা</span><b>M.A in English (ঢাকা বিশ্ববিদ্যালয়)</b></div>
+            <div><span><i class="fa-solid fa-phone"></i> মোবাইল</span><b>01922-889900</b></div>
+            <div><span><i class="fa-solid fa-envelope"></i> ইমেইল</span><b>farhana.eng@tcbd.com</b></div>
+          </div>
+          <button class="tc-contact-btn" onclick="alert('যোগাযোগের জন্য অনুগ্রহ করে লগইন করুন।')">যোগাযোগ করুন</button>
+        </div>
+      </div>
+
+      <div class="teacher-card">
+        <div class="tc-head">
+          <span class="id-badge">TC-1129</span>
+          <span class="version-badge">বাংলা ভার্সন</span>
+          <div class="tc-photo"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=AmitSir&top=shortHairShortWaved&clothing=collarSweater&accessories=round" alt="শিক্ষক ছবি"></div>
+          <span class="gender-tag male"><i class="fa-solid fa-mars"></i> পুরুষ &nbsp;|&nbsp; <i class="fa-solid fa-om"></i> সনাতন</span>
+        </div>
+        <div class="tc-body">
+          <h4>অমিত কুমার সাহা</h4>
+          <div class="tc-role">সহকারী অধ্যাপক · উচ্চ মাধ্যমিক (পদার্থবিজ্ঞান)</div>
+          <p class="tc-bio">বিশ্ববিদ্যালয় ভর্তি পরীক্ষার পদার্থবিজ্ঞানে বিশেষায়িত, সহজবোধ্য পাঠদান পদ্ধতির জন্য পরিচিত।</p>
+          <div class="tc-details">
+            <div><span><i class="fa-solid fa-user-graduate"></i> যোগ্যতা</span><b>M.Sc (পদার্থবিজ্ঞান), রাজশাহী বিশ্ববিদ্যালয়</b></div>
+            <div><span><i class="fa-solid fa-phone"></i> মোবাইল</span><b>01633-112200</b></div>
+            <div><span><i class="fa-solid fa-envelope"></i> ইমেইল</span><b>amit.physics@tcbd.com</b></div>
+          </div>
+          <button class="tc-contact-btn" onclick="alert('যোগাযোগের জন্য অনুগ্রহ করে লগইন করুন।')">যোগাযোগ করুন</button>
+        </div>
+      </div>
+
+      <div class="teacher-card">
+        <div class="tc-head">
+          <span class="id-badge">TC-1150</span>
+          <span class="version-badge">কওমি/আলিয়া</span>
+          <div class="tc-photo"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=MamunHuzur&top=shortHairShortFlat&facialHair=beardMajestic&clothing=shirtCrewNeck&hairColor=2c1b18" alt="শিক্ষক ছবি"></div>
+          <span class="gender-tag male"><i class="fa-solid fa-mars"></i> পুরুষ &nbsp;|&nbsp; <i class="fa-solid fa-mosque"></i> ইসলাম</span>
+        </div>
+        <div class="tc-body">
+          <h4>মাওলানা আব্দুল্লাহ আল মামুন</h4>
+          <div class="tc-role">শিক্ষক · মাদ্রাসা বিভাগ (আরবি, হাদিস, ফিকাহ)</div>
+          <p class="tc-bio">কওমি ও আলিয়া উভয় ধারায় পাঠদানে অভিজ্ঞ, তাজবীদসহ কুরআন শিক্ষায় দক্ষ।</p>
+          <div class="tc-details">
+            <div><span><i class="fa-solid fa-user-graduate"></i> যোগ্যতা</span><b>কামিল (হাদিস), দাওরায়ে হাদিস</b></div>
+            <div><span><i class="fa-solid fa-phone"></i> মোবাইল</span><b>01544-778899</b></div>
+            <div><span><i class="fa-solid fa-envelope"></i> ইমেইল</span><b>mamun.arabic@tcbd.com</b></div>
+          </div>
+          <button class="tc-contact-btn" onclick="alert('যোগাযোগের জন্য অনুগ্রহ করে লগইন করুন।')">যোগাযোগ করুন</button>
+        </div>
+      </div>
+
+      <div class="teacher-card">
+        <div class="tc-head">
+          <span class="id-badge">TC-1183</span>
+          <span class="version-badge">বাংলা ভার্সন</span>
+          <div class="tc-photo"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=TaniaMiss&top=longHairBun&clothing=blazerShirt&accessories=prescription01" alt="শিক্ষক ছবি"></div>
+          <span class="gender-tag female"><i class="fa-solid fa-venus"></i> মহিলা &nbsp;|&nbsp; <i class="fa-solid fa-mosque"></i> ইসলাম</span>
+        </div>
+        <div class="tc-body">
+          <h4>তানিয়া হক</h4>
+          <div class="tc-role">প্রশিক্ষক · জব প্রিপারেশন (বিসিএস/ব্যাংক)</div>
+          <p class="tc-bio">বিসিএস প্রিলি ও ব্যাংক জব প্রস্তুতিতে ৮ বছরের অভিজ্ঞতা, বাংলা ও সাধারণ জ্ঞানে বিশেষজ্ঞ।</p>
+          <div class="tc-details">
+            <div><span><i class="fa-solid fa-user-graduate"></i> যোগ্যতা</span><b>M.S.S, ৪২তম বিসিএস প্রার্থী</b></div>
+            <div><span><i class="fa-solid fa-phone"></i> মোবাইল</span><b>01755-334455</b></div>
+            <div><span><i class="fa-solid fa-envelope"></i> ইমেইল</span><b>tania.bcs@tcbd.com</b></div>
+          </div>
+          <button class="tc-contact-btn" onclick="alert('যোগাযোগের জন্য অনুগ্রহ করে লগইন করুন।')">যোগাযোগ করুন</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="forms" style="margin-top:90px;">
+    <div class="section-head">
+      <span class="eyebrow">যোগ দিন আমাদের সাথে</span>
+      <h2 class="section-title">রেজিস্ট্রেশন / ফর্ম</h2>
+      <p class="section-sub">শিক্ষক হিসেবে আবেদন করুন অথবা আপনার সন্তানের জন্য উপযুক্ত শিক্ষক খুঁজতে রিকুয়েস্ট পাঠান।</p>
+    </div>
+
+    <div class="forms-wrapper">
+      <div class="form-box">
+        <h3><i class="fa-solid fa-user-graduate"></i> শিক্ষক হিসেবে আবেদন ফর্ম</h3>
+        <form onsubmit="handleSubmit(event, 'শিক্ষক')">
+          <div class="form-group"><label>পূর্ণ নাম</label><input type="text" required placeholder="আপনার নাম লিখুন"></div>
+          <div class="form-group"><label>শিক্ষাগত যোগ্যতা ও বায়ো</label><textarea rows="3" required placeholder="আপনার অনার্স/মাস্টার্স বা অর্জিত ডিগ্রির বিবরণ দিন"></textarea></div>
+          <div class="form-group"><label>দক্ষতার বিভাগ ও বিষয়</label><input type="text" required placeholder="উদা: মাধ্যমিক (গণিত, পদার্থ)"></div>
+          <div class="form-group"><label>মোবাইল নম্বর</label><input type="tel" required placeholder="017XXXXXXXX"></div>
+          <button type="submit">আবেদন সম্পন্ন করুন</button>
+        </form>
+      </div>
+
+      <div class="form-box parent-box">
+        <h3><i class="fa-solid fa-user-shield"></i> অভিভাবক / শিক্ষার্থীর রিকুয়েস্ট ফর্ম</h3>
+        <form onsubmit="handleSubmit(event, 'অভিভাবক')">
+          <div class="form-group"><label>অভিভাবক/শিক্ষার্থীর নাম</label><input type="text" required placeholder="আপনার নাম লিখুন"></div>
+          <div class="form-group"><label>শ্রেণি ও বিষয়সমূহ</label><input type="text" required placeholder="কোন শ্রেণির, কোন কোন বিষয়ের শিক্ষক প্রয়োজন?"></div>
+          <div class="form-group"><label>এলাকা / ঠিকানা</label><input type="text" required placeholder="আপনার বর্তমান ঠিকানা দিন"></div>
+          <div class="form-group"><label>মোবাইল নম্বর</label><input type="tel" required placeholder="01XXXXXXXXX"></div>
+          <button type="submit">শিক্ষকের জন্য রিকুয়েস্ট পাঠান</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section id="login" class="auth-section" style="margin-top:90px;">
+    <h2>সদস্য পোর্টাল (লগইন)</h2>
+    <p>আইডি ও পাসওয়ার্ড দিয়ে আপনার অ্যাকাউন্টে প্রবেশ করুন</p>
+    <div class="login-box">
+      <div class="form-group" style="text-align:left;">
+        <label>ব্যবহারকারীর ধরন</label>
+        <select><option>শিক্ষার্থী</option><option>অভিভাবক</option><option>শিক্ষক</option></select>
+      </div>
+      <div class="form-group" style="text-align:left;"><label>ইউজার আইডি / ইমেইল</label><input type="text" placeholder="ID or Email"></div>
+      <div class="form-group" style="text-align:left;"><label>পাসওয়ার্ড</label><input type="password" placeholder="******"></div>
+      <button onclick="alert('লগইন সিস্টেম সফলভাবে ট্রিগার হয়েছে!')">লগইন</button>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-logo">
+      <h2>Teachers' Center</h2>
+      <p>আধুনিক ও নৈতিক শিক্ষায় শিক্ষিত জাতি গঠনে আমাদের এই ক্ষুদ্র প্রয়াস। সেরা শিক্ষকদের মিলনমেলা।</p>
+    </div>
+    <div class="footer-info">
+      <h4>যোগাযোগের ঠিকানা</h4>
+      <p><i class="fa-solid fa-location-dot"></i> অফিস: মুজিব সড়ক, সিরাজগঞ্জ সদর, সিরাজগঞ্জ।</p>
+      <p><i class="fa-solid fa-phone"></i> মোবাইল: 01300231145</p>
+      <p><i class="fa-solid fa-envelope"></i> ইমেইল: masud.rana.bba.mba.99@gmail.com</p>
+    </div>
+    <div class="footer-ceo">
+      <h4>ম্যানেজমেন্ট</h4>
+      <p>সিইও (CEO): মো: মাসুদ রানা</p>
+      <p style="font-size:13px;margin-top:5px;color:#cbd5e1;">BBA, MBA</p>
+    </div>
+  </div>
+  <div class="copyright">&copy; 2026 Teachers' Center. All rights reserved.</div>
+</footer>
+
+<script>
+  function searchTutor(){
+    const dept = document.getElementById('search-dept').value;
+    const subject = document.getElementById('search-subject').value;
+    if(!dept || !subject){
+      alert("অনুগ্রহ করে বিভাগ এবং বিষয় দুটিই সিলেক্ট করুন।");
+    } else {
+      alert("আপনার সার্চকৃত তথ্যের ভিত্তিতে টিউটর খোঁজা হচ্ছে... (যোগাযোগ ফি প্রদান সাপেক্ষে চূড়ান্ত প্রোফাইল আনলক হবে)");
+    }
+  }
+  function handleSubmit(event, role){
+    event.preventDefault();
+    alert(`ধন্যবাদ! ${role} হিসেবে আপনার ফর্মটি সফলভাবে জমা হয়েছে। আমাদের প্রতিনিধি দ্রুত যোগাযোগ করবেন।`);
+    event.target.reset();
+  }
+</script>
+</body>
+</html>
