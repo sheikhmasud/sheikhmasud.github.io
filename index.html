@@ -351,8 +351,12 @@
       <p>বাংলাদেশ ইসলামী ছাত্রশিবির, সিরাজগঞ্জ শহর শাখার উদ্যোগে পাঠচক্রের সদস্যদের নিয়ে "নৌকা ভ্রমণ ও মৌসুমি ফল উৎসব" অনুষ্ঠিত হয়েছে।
 অনুষ্ঠানে পাঠচক্রের সদস্যরা নৌকা ভ্রমণের মাধ্যমে প্রাকৃতিক সৌন্দর্য উপভোগ করেন এবং পারস্পরিক সৌহার্দ্য, ভ্রাতৃত্ববোধ ও সাংগঠনিক বন্ধন আরও সুদৃঢ় করার সুযোগ পান।
 পরবর্তীতে দেশীয় বিভিন্ন মৌসুমি ফল নিয়ে আয়োজিত ফল উৎসবে অংশগ্রহণকারীরা।</p>
-      <div class="meta-row"><span>প্রতিবেদক: সাবিনা ইয়াসমিন</span><span>৪৫ মিনিট আগে</span></div>
-    </div>
+      <div class="meta-row">
+        <div class="meta-row">
+    <span>প্রতিবেদক: সাবিনা ইয়াসমিন</span>
+    <!-- এখানে data-time এর ভেতর (Year-Month-Day Hour:Minute:Second) ফরমেটে নিউজ প্রকাশের সময় দেবেন -->
+    <span class="news-time" data-time="2026-07-19 00:50:00">হিসাব করা হচ্ছে...</span>
+        </div>
     <div class="subhead-list">
       <div class="subhead-item">
         <div class="media g2 thumb"></div>
@@ -629,6 +633,64 @@
       opt.style.borderColor = getComputedStyle(document.documentElement).getPropertyValue('--crimson');
     });
   });
-</script>
+</script> 
+  <script>
+    // ইংরেজি সংখ্যাকে বাংলা সংখ্যায় রূপান্তর করার ফাংশন
+    function toBanglaNumber(num) {
+        const banglaDigits = {'0': '০', '1': '১', '2': '২', '3': '৩', '4': '৪', '5': '৫', '6': '৬', '7': '৭', '8': '৮', '9': '৯'};
+        return num.toString().split('').map(digit => banglaDigits[digit] || digit).join('');
+    }
+
+    // সময় কাউন্ট করার মূল ফাংশন
+    function updateNewsTimes() {
+        const timeElements = document.querySelectorAll('.news-time');
+        
+        timeElements.forEach(elem => {
+            const publishTimeString = elem.getAttribute('data-time');
+            if (!publishTimeString) return;
+
+            // 'YYYY-MM-DD HH:MM:SS' ফরমেটকে জাভাস্ক্রিপ্ট ডেট অবজেক্টে রূপান্তর
+            const publishTime = new Date(publishTimeString.replace(/-/g, "/"));
+            const currentTime = new Date();
+            
+            // সময়ের পার্থক্য মিলিসেকেন্ডে বের করা
+            const timeDifference = currentTime - publishTime; 
+
+            if (timeDifference < 0) {
+                elem.innerText = "এইমাত্র";
+                return;
+            }
+
+            const seconds = Math.floor(timeDifference / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+
+            let timeText = "";
+
+            if (seconds < 60) {
+                timeText = "এইমাত্র";
+            } else if (minutes < 60) {
+                timeText = toBanglaNumber(minutes) + " মিনিট আগে";
+            } else if (hours < 24) {
+                timeText = toBanglaNumber(hours) + " ঘণ্টা আগে";
+            } else if (days < 30) {
+                timeText = toBanglaNumber(days) + " দিন আগে";
+            } else {
+                // ১ মাসের বেশি পুরনো হলে মূল তারিখটি দেখিয়ে দেবে
+                timeText = publishTimeString.split(' ')[0]; 
+            }
+
+            elem.innerText = timeText;
+        });
+    }
+
+    // পেজ লোড হওয়ার সাথে সাথে রান হবে
+    document.addEventListener("DOMContentLoaded", () => {
+        updateNewsTimes();
+        // প্রতি ১ মিনিটে (৬০,০০০ মিলিসেকেন্ডে) সময়টি স্বয়ংক্রিয়ভাবে আপডেট হবে
+        setInterval(updateNewsTimes, 60000); 
+    });
+  </script>
 </body>
 </html>
